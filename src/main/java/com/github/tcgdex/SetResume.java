@@ -1,4 +1,4 @@
-package com.github.maxopoly.tcgdex;
+package com.github.tcgdex;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,6 +31,11 @@ public class SetResume {
 	private final int officialCardCount;
 	private final int totalCardCount;
 
+	public SetResume(JSONObject json) {
+		this(json.getString("id"), json.getString("name"), json.optString("logo"), json.optString("symbol"),
+				json.getJSONObject("cardCount").getInt("total"), json.getJSONObject("cardCount").getInt("official"));
+	}
+
 	SetResume(String id, String name, String logo, String symbol, int officialCardCount, int totalCardCount) {
 		this.id = id;
 		this.name = name;
@@ -38,11 +43,6 @@ public class SetResume {
 		this.symbol = symbol;
 		this.officialCardCount = officialCardCount;
 		this.totalCardCount = totalCardCount;
-	}
-
-	public SetResume(JSONObject json) {
-		this(json.getString("id"), json.getString("name"), json.optString("logo"), json.optString("symbol"),
-				json.getJSONObject("cardCount").getInt("total"), json.getJSONObject("cardCount").getInt("official"));
 	}
 
 	/**
@@ -53,13 +53,6 @@ public class SetResume {
 	}
 
 	/**
-	 * @return Set name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
 	 * @return Set logo URL, may be null
 	 */
 	public String getLogo() {
@@ -67,10 +60,10 @@ public class SetResume {
 	}
 
 	/**
-	 * @return Set symbol URL, may be null
+	 * @return Set name
 	 */
-	public String getSymbol() {
-		return symbol;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -78,6 +71,13 @@ public class SetResume {
 	 */
 	public int getOfficialCardCount() {
 		return officialCardCount;
+	}
+
+	/**
+	 * @return Set symbol URL, may be null
+	 */
+	public String getSymbol() {
+		return symbol;
 	}
 
 	/**

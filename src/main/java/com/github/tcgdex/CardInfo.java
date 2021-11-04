@@ -1,4 +1,4 @@
-package com.github.maxopoly.tcgdex;
+package com.github.tcgdex;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,35 +34,6 @@ public class CardInfo extends CardResume {
 	private final Integer retreat;
 	private final String regulationMark;
 
-	public CardInfo(String id, String localId, String name, String image, String illustrator, Rarities rarity,
-			Categories category, boolean hasNormalVariant, boolean hasReverseVariant, boolean hasHolo,
-			boolean hasFirstEditionPic, SetResume set, List<Integer> dexIDs, Integer hp, List<Types> types,
-			String evolveFrom, String description, String level, String stage, String suffix, List<Attack> attacks,
-			List<Weakness> weakness, List<Ability> abilities, Integer retreat, String regulationMark) {
-		super(id, localId, name, image);
-		this.illustrator = illustrator;
-		this.rarity = rarity;
-		this.category = category;
-		this.hasNormalVariant = hasNormalVariant;
-		this.hasReverseVariant = hasReverseVariant;
-		this.hasHolo = hasHolo;
-		this.hasFirstEditionPic = hasFirstEditionPic;
-		this.set = set;
-		this.dexIDs = dexIDs;
-		this.hp = hp;
-		this.types = types;
-		this.evolveFrom = evolveFrom;
-		this.description = description;
-		this.level = level;
-		this.stage = stage;
-		this.suffix = suffix;
-		this.attacks = attacks;
-		this.weakness = weakness;
-		this.abilities = abilities;
-		this.retreat = retreat;
-		this.regulationMark = regulationMark;
-	}
-
 	CardInfo(JSONObject json) {
 		super(json);
 		this.illustrator = json.getString("illustrator");
@@ -95,20 +66,41 @@ public class CardInfo extends CardResume {
 		this.abilities = Ability.parse(json.optJSONArray("abilities"));
 	}
 
+	public CardInfo(String id, String localId, String name, String image, String illustrator, Rarities rarity,
+			Categories category, boolean hasNormalVariant, boolean hasReverseVariant, boolean hasHolo,
+			boolean hasFirstEditionPic, SetResume set, List<Integer> dexIDs, Integer hp, List<Types> types,
+			String evolveFrom, String description, String level, String stage, String suffix, List<Attack> attacks,
+			List<Weakness> weakness, List<Ability> abilities, Integer retreat, String regulationMark) {
+		super(id, localId, name, image);
+		this.illustrator = illustrator;
+		this.rarity = rarity;
+		this.category = category;
+		this.hasNormalVariant = hasNormalVariant;
+		this.hasReverseVariant = hasReverseVariant;
+		this.hasHolo = hasHolo;
+		this.hasFirstEditionPic = hasFirstEditionPic;
+		this.set = set;
+		this.dexIDs = dexIDs;
+		this.hp = hp;
+		this.types = types;
+		this.evolveFrom = evolveFrom;
+		this.description = description;
+		this.level = level;
+		this.stage = stage;
+		this.suffix = suffix;
+		this.attacks = attacks;
+		this.weakness = weakness;
+		this.abilities = abilities;
+		this.retreat = retreat;
+		this.regulationMark = regulationMark;
+	}
+
 	/**
 	 * @return Pokemon's abilities. May be empty if it doesn't have any, but never
 	 *         null
 	 */
 	public List<Ability> getAbilities() {
 		return abilities;
-	}
-
-	/**
-	 * 
-	 * @return Card's regulation mark. May be null if unknown or doesn't exist
-	 */
-	public String getRegulationMark() {
-		return regulationMark;
 	}
 
 	/**
@@ -119,17 +111,43 @@ public class CardInfo extends CardResume {
 	}
 
 	/**
-	 * @return Weaknesses the pokemon has. Empty for cards without attacks
+	 * 
+	 * @return Card category
 	 */
-	public List<Weakness> getWeakness() {
-		return weakness;
+	public Categories getCategory() {
+		return category;
 	}
 
 	/**
-	 * @return Card's retreat. Will be null for cards without retreat
+	 * 
+	 * @return List of the national pokedex IDs of the pokemon on the card (may be
+	 *         multiple)
 	 */
-	public Integer getRetreat() {
-		return retreat;
+	public List<Integer> getDexIDs() {
+		return dexIDs;
+	}
+
+	/**
+	 * 
+	 * @return Card effect/description, may be null
+	 */
+	public String getEffect() {
+		return description;
+	}
+
+	/**
+	 * 
+	 * @return Name of the pokemon this one evolves from
+	 */
+	public String getEvolveFrom() {
+		return evolveFrom;
+	}
+
+	/**
+	 * @return HP of the pokemon, will be null if the card is not a pokemon
+	 */
+	public Integer getHp() {
+		return hp;
 	}
 
 	/**
@@ -142,6 +160,14 @@ public class CardInfo extends CardResume {
 
 	/**
 	 * 
+	 * @return Pokemon level, may be 'X', hence not an integer
+	 */
+	public String getLevel() {
+		return level;
+	}
+
+	/**
+	 * 
 	 * @return Card rarity
 	 */
 	public Rarities getRarity() {
@@ -150,10 +176,68 @@ public class CardInfo extends CardResume {
 
 	/**
 	 * 
-	 * @return Card category
+	 * @return Card's regulation mark. May be null if unknown or doesn't exist
 	 */
-	public Categories getCategory() {
-		return category;
+	public String getRegulationMark() {
+		return regulationMark;
+	}
+
+	/**
+	 * @return Card's retreat. Will be null for cards without retreat
+	 */
+	public Integer getRetreat() {
+		return retreat;
+	}
+
+	/**
+	 * @return Resume of the set the card belongs to
+	 */
+	public SetResume getSet() {
+		return set;
+	}
+
+	/**
+	 * @return Pokemon's stage, like 'Basic'
+	 */
+	public String getStage() {
+		return stage;
+	}
+
+	/**
+	 * @return Suffix, like 'V', may be null
+	 */
+	public String getSuffix() {
+		return suffix;
+	}
+
+	/**
+	 * @return Types of the pokemon
+	 */
+	public List<Types> getTypes() {
+		return types;
+	}
+
+	/**
+	 * @return Weaknesses the pokemon has. Empty for cards without attacks
+	 */
+	public List<Weakness> getWeakness() {
+		return weakness;
+	}
+
+	/**
+	 * 
+	 * @return Does the card have a small first edition in the middle left
+	 */
+	public boolean hasFirstEditionPic() {
+		return hasFirstEditionPic;
+	}
+
+	/**
+	 * 
+	 * @return Does the card have a holo variant (picture is shining)
+	 */
+	public boolean hasHoloVariant() {
+		return hasHolo;
 	}
 
 	/**
@@ -170,90 +254,6 @@ public class CardInfo extends CardResume {
 	 */
 	public boolean hasReverseVariant() {
 		return hasReverseVariant;
-	}
-
-	/**
-	 * 
-	 * @return Does the card have a holo variant (picture is shining)
-	 */
-	public boolean hasHoloVariant() {
-		return hasHolo;
-	}
-
-	/**
-	 * 
-	 * @return Does the card have a small first edition in the middle left
-	 */
-	public boolean hasFirstEditionPic() {
-		return hasFirstEditionPic;
-	}
-
-	/**
-	 * @return Resume of the set the card belongs to
-	 */
-	public SetResume getSet() {
-		return set;
-	}
-
-	/**
-	 * 
-	 * @return List of the national pokedex IDs of the pokemon on the card (may be
-	 *         multiple)
-	 */
-	public List<Integer> getDexIDs() {
-		return dexIDs;
-	}
-
-	/**
-	 * @return HP of the pokemon, will be null if the card is not a pokemon
-	 */
-	public Integer getHp() {
-		return hp;
-	}
-
-	/**
-	 * @return Types of the pokemon
-	 */
-	public List<Types> getTypes() {
-		return types;
-	}
-
-	/**
-	 * 
-	 * @return Name of the pokemon this one evolves from
-	 */
-	public String getEvolveFrom() {
-		return evolveFrom;
-	}
-
-	/**
-	 * 
-	 * @return Card effect/description, may be null
-	 */
-	public String getEffect() {
-		return description;
-	}
-
-	/**
-	 * 
-	 * @return Pokemon level, may be 'X', hence not an integer
-	 */
-	public String getLevel() {
-		return level;
-	}
-
-	/**
-	 * @return Pokemon's stage, like 'Basic'
-	 */
-	public String getStage() {
-		return stage;
-	}
-
-	/**
-	 * @return Suffix, like 'V', may be null
-	 */
-	public String getSuffix() {
-		return suffix;
 	}
 
 }

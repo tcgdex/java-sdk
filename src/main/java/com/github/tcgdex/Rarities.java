@@ -1,4 +1,4 @@
-package com.github.maxopoly.tcgdex;
+package com.github.tcgdex;
 
 public enum Rarities {
 	

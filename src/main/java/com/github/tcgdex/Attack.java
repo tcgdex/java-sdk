@@ -1,4 +1,4 @@
-package com.github.maxopoly.tcgdex;
+package com.github.tcgdex;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +30,11 @@ public class Attack {
 	private final String effect;
 	private final String damage;
 
+	Attack(JSONObject json) {
+		this(Types.parse(json.getJSONArray("cost")), json.getString("name"), json.optString("effect"),
+				json.optString("damage"));
+	}
+
 	Attack(List<Types> cost, String name, String effect, String damage) {
 		super();
 		this.cost = cost;
@@ -38,11 +43,7 @@ public class Attack {
 		this.damage = damage;
 	}
 
-	Attack(JSONObject json) {
-		this(Types.parse(json.getJSONArray("cost")), json.getString("name"), json.optString("effect"),
-				json.optString("damage"));
-	}
-
+	@Override
 	public boolean equals(Object o) {
 		if (!(o instanceof Attack)) {
 			return false;
@@ -52,10 +53,6 @@ public class Attack {
 				new Object[] { other.cost, other.name, other.effect, other.damage });
 	}
 	
-	public int hashCode() {
-		return Objects.hash(this.cost, this.name, this.effect, this.damage);
-	}
-
 	/**
 	 * @return Cost of the attack in the same order as listed on the card
 	 */
@@ -64,10 +61,11 @@ public class Attack {
 	}
 
 	/**
-	 * @return Name of the attack
+	 * @return Damage the attack deals. May just be a number like '30', but can also
+	 *         be a multiplier like 'x20'
 	 */
-	public String getName() {
-		return name;
+	public String getDamage() {
+		return damage;
 	}
 
 	/**
@@ -78,11 +76,15 @@ public class Attack {
 	}
 
 	/**
-	 * @return Damage the attack deals. May just be a number like '30', but can also
-	 *         be a multiplier like 'x20'
+	 * @return Name of the attack
 	 */
-	public String getDamage() {
-		return damage;
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.cost, this.name, this.effect, this.damage);
 	}
 
 }

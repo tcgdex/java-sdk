@@ -1,4 +1,4 @@
-package com.github.maxopoly.tcgdex;
+package com.github.tcgdex;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +32,16 @@ public class TCGDexAPI {
 		this.language = language;
 	}
 
+	private String buildURL(String path, String... optional) {
+		String result = String.format(API_URL, this.language.getAPIID(), path);
+		// not gonna do a string builder here, because we intend this array to be of
+		// length 1 in almost all cases
+		for (String opt : optional) {
+			result += "/" + opt;
+		}
+		return result;
+	}
+
 	/**
 	 * Gets a list containing the core information for every core
 	 * 
@@ -44,43 +54,23 @@ public class TCGDexAPI {
 	}
 
 	/**
-	 * Gets detailed information of a card based on a sets identifier and the
-	 * identifier/index of a card within this set. Note that for example 'base4-1'
-	 * is already a combined identifier, here the correct setID would be 'base4' and
-	 * the cardID '1'
+	 * Gets a list of all known card illustrators
 	 * 
-	 * @param setID  Unique ID of the set
-	 * @param cardID ID/index describing the card within the set
-	 * @return Card info obtained
+	 * @return List of all illustrators
 	 * @throws IOException Thrown in response to any kind of networking error
 	 */
-	public CardInfo getCardInfo(String setID, String cardID) throws IOException {
-		String data = Utils.doGet(buildURL("sets", setID, cardID));
-		return new CardInfo(new JSONObject(data));
+	public List<String> getAllIllustrators() throws IOException {
+		return loadStringArrayFrom("illustrators");
 	}
 
-	/**
-	 * Gets detailed information of a card based on its globally unique identifier,
-	 * for example 'base4-1'
-	 * 
-	 * @param globalCardID Globally unique ID of the card
-	 * @return Card info obtained
-	 * @throws IOException Thrown in response to any kind of networking error
-	 */
-	public CardInfo getCardInfo(String globalCardID) throws IOException {
-		String data = Utils.doGet(buildURL("cards", globalCardID));
-		return new CardInfo(new JSONObject(data));
-	}
-
-	/**
-	 * Gets detailed information of a card based on its resume
-	 * 
-	 * @param card Card to get info for
-	 * @return Card info obtained
-	 * @throws IOException Thrown in response to any kind of networking error
-	 */
-	public CardInfo getCardInfo(CardResume card) throws IOException {
-		return getCardInfo(card.getId());
+	public List<Integer> getAllPossibleHPValues() throws IOException {
+		String data = Utils.doGet(buildURL("hp"));
+		JSONArray json = new JSONArray(data);
+		List<Integer> result = new ArrayList<>();
+		for (int i = 0; i < json.length(); i++) {
+			result.add(json.getInt(i));
+		}
+		return result;
 	}
 
 	/**
@@ -111,15 +101,43 @@ public class TCGDexAPI {
 	}
 
 	/**
-	 * Gets detailed information of a series based on its ID
+	 * Gets detailed information of a card based on its resume
 	 * 
-	 * @param seriesID ID of the series
-	 * @return Detailed information of the series
+	 * @param card Card to get info for
+	 * @return Card info obtained
 	 * @throws IOException Thrown in response to any kind of networking error
 	 */
-	public SeriesInfo getSeriesInfo(String seriesID) throws IOException {
-		String data = Utils.doGet(buildURL("series", seriesID));
-		return new SeriesInfo(new JSONObject(data));
+	public CardInfo getCardInfo(CardResume card) throws IOException {
+		return getCardInfo(card.getId());
+	}
+	
+	/**
+	 * Gets detailed information of a card based on its globally unique identifier,
+	 * for example 'base4-1'
+	 * 
+	 * @param globalCardID Globally unique ID of the card
+	 * @return Card info obtained
+	 * @throws IOException Thrown in response to any kind of networking error
+	 */
+	public CardInfo getCardInfo(String globalCardID) throws IOException {
+		String data = Utils.doGet(buildURL("cards", globalCardID));
+		return new CardInfo(new JSONObject(data));
+	}
+
+	/**
+	 * Gets detailed information of a card based on a sets identifier and the
+	 * identifier/index of a card within this set. Note that for example 'base4-1'
+	 * is already a combined identifier, here the correct setID would be 'base4' and
+	 * the cardID '1'
+	 * 
+	 * @param setID  Unique ID of the set
+	 * @param cardID ID/index describing the card within the set
+	 * @return Card info obtained
+	 * @throws IOException Thrown in response to any kind of networking error
+	 */
+	public CardInfo getCardInfo(String setID, String cardID) throws IOException {
+		String data = Utils.doGet(buildURL("sets", setID, cardID));
+		return new CardInfo(new JSONObject(data));
 	}
 	
 	/**
@@ -135,17 +153,17 @@ public class TCGDexAPI {
 	}
 
 	/**
-	 * Gets detailed information of a set based on its ID
+	 * Gets detailed information of a series based on its ID
 	 * 
-	 * @param setID ID of the set
-	 * @return Detailed information of the set
+	 * @param seriesID ID of the series
+	 * @return Detailed information of the series
 	 * @throws IOException Thrown in response to any kind of networking error
 	 */
-	public SetInfo getSetInfo(String setID) throws IOException {
-		String data = Utils.doGet(buildURL("sets", setID));
-		return new SetInfo(new JSONObject(data));
+	public SeriesInfo getSeriesInfo(String seriesID) throws IOException {
+		String data = Utils.doGet(buildURL("series", seriesID));
+		return new SeriesInfo(new JSONObject(data));
 	}
-	
+
 	/**
 	 * Gets detailed information of a set based on a card belonging to it
 	 * 
@@ -159,36 +177,24 @@ public class TCGDexAPI {
 		return new SetInfo(new JSONObject(data));
 	}
 
-	List<String> loadRarities() throws IOException {
-		return loadStringArrayFrom("rarities");
+	/**
+	 * Gets detailed information of a set based on its ID
+	 * 
+	 * @param setID ID of the set
+	 * @return Detailed information of the set
+	 * @throws IOException Thrown in response to any kind of networking error
+	 */
+	public SetInfo getSetInfo(String setID) throws IOException {
+		String data = Utils.doGet(buildURL("sets", setID));
+		return new SetInfo(new JSONObject(data));
 	}
 
 	List<String> loadCategories() throws IOException {
 		return loadStringArrayFrom("categories");
 	}
 
-	List<String> loadTypes() throws IOException {
-		return loadStringArrayFrom("types");
-	}
-
-	/**
-	 * Gets a list of all known card illustrators
-	 * 
-	 * @return List of all illustrators
-	 * @throws IOException Thrown in response to any kind of networking error
-	 */
-	public List<String> getAllIllustrators() throws IOException {
-		return loadStringArrayFrom("illustrators");
-	}
-
-	public List<Integer> getAllPossibleHPValues() throws IOException {
-		String data = Utils.doGet(buildURL("hp"));
-		JSONArray json = new JSONArray(data);
-		List<Integer> result = new ArrayList<>();
-		for (int i = 0; i < json.length(); i++) {
-			result.add(json.getInt(i));
-		}
-		return result;
+	List<String> loadRarities() throws IOException {
+		return loadStringArrayFrom("rarities");
 	}
 
 	private List<String> loadStringArrayFrom(String path) throws IOException {
@@ -201,14 +207,8 @@ public class TCGDexAPI {
 		return result;
 	}
 
-	private String buildURL(String path, String... optional) {
-		String result = String.format(API_URL, this.language.getAPIID(), path);
-		// not gonna do a string builder here, because we intend this array to be of
-		// length 1 in almost all cases
-		for (String opt : optional) {
-			result += "/" + opt;
-		}
-		return result;
+	List<String> loadTypes() throws IOException {
+		return loadStringArrayFrom("types");
 	}
 
 }

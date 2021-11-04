@@ -1,4 +1,4 @@
-package com.github.maxopoly.tcgdex;
+package com.github.tcgdex;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.github.maxopoly.tcgdex;
+package com.github.tcgdex;
 
 import java.util.List;
 
@@ -12,14 +12,14 @@ public class SeriesInfo extends SeriesResume {
 	
 	private final List<SetResume> sets;
 	
-	SeriesInfo(String id, String name, List<SetResume> sets) {
-		super(id, name);
-		this.sets = sets;
-	}
-
 	SeriesInfo(JSONObject json) {
 		super(json);
 		this.sets = SetResume.parse(json.optJSONArray("sets"));
+	}
+
+	SeriesInfo(String id, String name, List<SetResume> sets) {
+		super(id, name);
+		this.sets = sets;
 	}
 
 	/**

@@ -1,8 +1,19 @@
-package com.github.maxopoly.tcgdex;
+package com.github.tcgdex;
 
 import org.junit.Test;
 
-import com.github.maxopoly.tcgdex.TCGDexAPI.Language;
+import com.github.tcgdex.Ability;
+import com.github.tcgdex.Attack;
+import com.github.tcgdex.CardInfo;
+import com.github.tcgdex.Categories;
+import com.github.tcgdex.Rarities;
+import com.github.tcgdex.SeriesInfo;
+import com.github.tcgdex.SetInfo;
+import com.github.tcgdex.SetResume;
+import com.github.tcgdex.TCGDexAPI;
+import com.github.tcgdex.Types;
+import com.github.tcgdex.Weakness;
+import com.github.tcgdex.TCGDexAPI.Language;
 
 import static org.junit.Assert.*;
 

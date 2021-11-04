@@ -1,4 +1,4 @@
-package com.github.maxopoly.tcgdex;
+package com.github.tcgdex;
 
 import org.json.JSONObject;
 
@@ -11,13 +11,13 @@ public class SeriesResume {
 	private final String id;
 	private final String name;
 
+	SeriesResume(JSONObject json) {
+		this(json.getString("id"), json.getString("name"));
+	}
+
 	SeriesResume(String id, String name) {
 		this.id = id;
 		this.name = name;
-	}
-
-	SeriesResume(JSONObject json) {
-		this(json.getString("id"), json.getString("name"));
 	}
 
 	/**

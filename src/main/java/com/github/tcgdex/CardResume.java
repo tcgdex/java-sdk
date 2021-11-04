@@ -1,4 +1,4 @@
-package com.github.maxopoly.tcgdex;
+package com.github.tcgdex;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,6 +29,10 @@ public class CardResume {
 	private final String name;
 	private final String image;
 	
+	CardResume(JSONObject json) {
+		this(json.getString("id"), json.getString("localId"), json.getString("name"), json.optString("image"));
+	}
+	
 	CardResume(String id, String localId, String name, String image) {
 		this.id = id;
 		this.localId = localId;
@@ -36,15 +40,19 @@ public class CardResume {
 		this.image = image;
 	}
 	
-	CardResume(JSONObject json) {
-		this(json.getString("id"), json.getString("localId"), json.getString("name"), json.optString("image"));
-	}
-	
 	/**
 	 * @return Globally unique card ID based on the set ID and the cards ID within the set
 	 */
 	public String getId() {
 		return id;
+	}
+	
+	/**
+	 * 
+	 * @return Card image, can be null
+	 */
+	public String getImage() {
+		return image;
 	}
 	
 	/**
@@ -60,13 +68,5 @@ public class CardResume {
 	 */
 	public String getName() {
 		return name;
-	}
-	
-	/**
-	 * 
-	 * @return Card image, can be null
-	 */
-	public String getImage() {
-		return image;
 	}
 }

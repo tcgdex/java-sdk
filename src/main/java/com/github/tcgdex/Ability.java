@@ -1,4 +1,4 @@
-package com.github.maxopoly.tcgdex;
+package com.github.tcgdex;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,16 +29,17 @@ public class Ability {
 	private final String name;
 	private final String effect;
 
+	Ability(JSONObject json) {
+		this(json.getString("type"), json.getString("name"), json.getString("effect"));
+	}
+
 	Ability(String type, String name, String effect) {
 		this.type = type;
 		this.name = name;
 		this.effect = effect;
 	}
 
-	Ability(JSONObject json) {
-		this(json.getString("type"), json.getString("name"), json.getString("effect"));
-	}
-
+	@Override
 	public boolean equals(Object o) {
 		if (!(o instanceof Ability)) {
 			return false;
@@ -48,15 +49,12 @@ public class Ability {
 				new Object[] { other.type, other.name, other.effect });
 	}
 
-	public int hashCode() {
-		return Objects.hash(this.type, this.name, this.effect);
-	}
-
 	/**
-	 * @return Type of the ability, for example 'Poke-POWER'
+	 * 
+	 * @return Description/Effect of the ability
 	 */
-	public String getType() {
-		return type;
+	public String getEffect() {
+		return effect;
 	}
 
 	/**
@@ -67,11 +65,15 @@ public class Ability {
 	}
 
 	/**
-	 * 
-	 * @return Description/Effect of the ability
+	 * @return Type of the ability, for example 'Poke-POWER'
 	 */
-	public String getEffect() {
-		return effect;
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.type, this.name, this.effect);
 	}
 
 }

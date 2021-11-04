@@ -1,4 +1,4 @@
-package com.github.maxopoly.tcgdex;
+package com.github.tcgdex;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -59,6 +59,20 @@ public class SetInfo extends SetResume {
 	}
 
 	/**
+	 * @return All cards part of the set
+	 */
+	public List<CardResume> getCards() {
+		return cards;
+	}
+
+	/**
+	 * @return Amount of first edition cards the set has
+	 */
+	public int getFirstEdCardCount() {
+		return firstEd;
+	}
+
+	/**
 	 * @return Amount of holo cards the set has
 	 */
 	public int getHoloCardCount() {
@@ -73,10 +87,10 @@ public class SetInfo extends SetResume {
 	}
 
 	/**
-	 * @return Amount of first edition cards the set has
+	 * @return When the set was released
 	 */
-	public int getFirstEdCardCount() {
-		return firstEd;
+	public LocalDate getReleaseDate() {
+		return releaseDate;
 	}
 
 	/**
@@ -101,20 +115,6 @@ public class SetInfo extends SetResume {
 	}
 
 	/**
-	 * @return When the set was released
-	 */
-	public LocalDate getReleaseDate() {
-		return releaseDate;
-	}
-
-	/**
-	 * @return Ability to use this set in standard competitions
-	 */
-	public boolean isLegalInStandard() {
-		return legalInStandard;
-	}
-
-	/**
 	 * @return Ability to use this set in Expanded competitions
 	 */
 	public boolean isLegalInExpanded() {
@@ -122,9 +122,9 @@ public class SetInfo extends SetResume {
 	}
 
 	/**
-	 * @return All cards part of the set
+	 * @return Ability to use this set in standard competitions
 	 */
-	public List<CardResume> getCards() {
-		return cards;
+	public boolean isLegalInStandard() {
+		return legalInStandard;
 	}
 }

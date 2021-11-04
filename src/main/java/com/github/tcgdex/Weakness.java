@@ -1,4 +1,4 @@
-package com.github.maxopoly.tcgdex;
+package com.github.tcgdex;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,15 +29,16 @@ public class Weakness {
 	private final String value;
 	
 	
+	Weakness(JSONObject json) {
+		this(Types.parse(json.getString("type")), json.getString("value"));
+	}
+	
 	Weakness(Types type, String value) {
 		this.type = type;
 		this.value = value;
 	}
 	
-	Weakness(JSONObject json) {
-		this(Types.parse(json.getString("type")), json.getString("value"));
-	}
-	
+	@Override
 	public boolean equals(Object o) {
 		if (!(o instanceof Weakness)) {
 			return false;
@@ -45,14 +46,6 @@ public class Weakness {
 		Weakness other = (Weakness) o;
 		return Objects.deepEquals(new Object[] { this.type, this.value},
 				new Object[] { other.type, other.value});
-	}
-	
-	public int hashCode() {
-		return Objects.hash(this.type, this.value);
-	}
-	
-	public String toString() {
-		return String.format("%s %s", this.type, this.value);
 	}
 	
 	/**
@@ -67,6 +60,16 @@ public class Weakness {
 	 */
 	public String getValue() {
 		return value;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.type, this.value);
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s %s", this.type, this.value);
 	}
 	
 	
