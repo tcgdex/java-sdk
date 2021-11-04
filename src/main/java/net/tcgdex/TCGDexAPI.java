@@ -1,4 +1,4 @@
-package com.github.tcgdex;
+package net.tcgdex;
 
 import java.io.IOException;
 import java.util.ArrayList;

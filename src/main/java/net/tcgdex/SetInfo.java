@@ -1,4 +1,4 @@
-package com.github.tcgdex;
+package net.tcgdex;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

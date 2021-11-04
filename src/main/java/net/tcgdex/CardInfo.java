@@ -1,4 +1,4 @@
-package com.github.tcgdex;
+package net.tcgdex;
 
 import java.util.ArrayList;
 import java.util.List;

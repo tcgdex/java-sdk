@@ -1,4 +1,4 @@
-package com.github.tcgdex;
+package net.tcgdex;
 
 import java.io.BufferedReader;
 import java.io.IOException;

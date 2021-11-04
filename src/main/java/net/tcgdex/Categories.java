@@ -1,4 +1,4 @@
-package com.github.tcgdex;
+package net.tcgdex;
 
 public enum Categories {
 	

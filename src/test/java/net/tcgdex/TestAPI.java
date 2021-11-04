@@ -1,21 +1,10 @@
-package com.github.tcgdex;
+package net.tcgdex;
 
-import org.junit.Test;
-
-import com.github.tcgdex.Ability;
-import com.github.tcgdex.Attack;
-import com.github.tcgdex.CardInfo;
-import com.github.tcgdex.Categories;
-import com.github.tcgdex.Rarities;
-import com.github.tcgdex.SeriesInfo;
-import com.github.tcgdex.SetInfo;
-import com.github.tcgdex.SetResume;
-import com.github.tcgdex.TCGDexAPI;
-import com.github.tcgdex.Types;
-import com.github.tcgdex.Weakness;
-import com.github.tcgdex.TCGDexAPI.Language;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.time.Month;
@@ -23,6 +12,20 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Test;
+
+import net.tcgdex.Ability;
+import net.tcgdex.Attack;
+import net.tcgdex.CardInfo;
+import net.tcgdex.Categories;
+import net.tcgdex.Rarities;
+import net.tcgdex.SeriesInfo;
+import net.tcgdex.SetInfo;
+import net.tcgdex.SetResume;
+import net.tcgdex.TCGDexAPI;
+import net.tcgdex.Types;
+import net.tcgdex.Weakness;
+import net.tcgdex.TCGDexAPI.Language;
 
 public class TestAPI {
 
