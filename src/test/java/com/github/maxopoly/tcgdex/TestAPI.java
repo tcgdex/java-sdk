@@ -118,6 +118,7 @@ public class TestAPI {
 		assertNotNull(api.getCardInfo("swsh3-84"));
 		assertNotNull(api.getCardInfo("swsh4-98"));
 		assertNotNull(api.getCardInfo("ex13-96"));
+		assertEquals("ex13", api.getSetInfo(api.getCardInfo("ex13-96")).getId());
 	}
 
 	@Test

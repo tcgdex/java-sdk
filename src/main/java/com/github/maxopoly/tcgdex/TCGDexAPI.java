@@ -121,6 +121,18 @@ public class TCGDexAPI {
 		String data = Utils.doGet(buildURL("series", seriesID));
 		return new SeriesInfo(new JSONObject(data));
 	}
+	
+	/**
+	 * Gets detailed information of a series based on a set belonging to it
+	 * 
+	 * @param set Set the series belongs to
+	 * @return Detailed information of the series
+	 * @throws IOException Thrown in response to any kind of networking error
+	 */
+	public SeriesInfo getSeriesInfo(SetInfo set) throws IOException {
+		String data = Utils.doGet(buildURL("series", set.getSeries().getId()));
+		return new SeriesInfo(new JSONObject(data));
+	}
 
 	/**
 	 * Gets detailed information of a set based on its ID
@@ -131,6 +143,19 @@ public class TCGDexAPI {
 	 */
 	public SetInfo getSetInfo(String setID) throws IOException {
 		String data = Utils.doGet(buildURL("sets", setID));
+		return new SetInfo(new JSONObject(data));
+	}
+	
+	/**
+	 * Gets detailed information of a set based on a card belonging to it
+	 * 
+	 * @param setID ID of the set
+	 * @return Detailed information of the set
+	 * @throws IOException Thrown in response to any kind of networking error
+	 */
+	public SetInfo getSetInfo(CardResume card) throws IOException {
+		String id = card.getId();
+		String data = Utils.doGet(buildURL("sets", id.substring(0, id.lastIndexOf("-"))));
 		return new SetInfo(new JSONObject(data));
 	}
 

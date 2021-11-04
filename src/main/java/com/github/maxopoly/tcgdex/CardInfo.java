@@ -10,12 +10,8 @@ import org.json.JSONObject;
  * Full description of a card, including all information available about it
  *
  */
-public class CardInfo {
+public class CardInfo extends CardResume {
 
-	private final String id;
-	private final String localId;
-	private final String name;
-	private final String image;
 	private final String illustrator;
 	private final Rarities rarity;
 	private final Categories category;
@@ -43,11 +39,7 @@ public class CardInfo {
 			boolean hasFirstEditionPic, SetResume set, List<Integer> dexIDs, Integer hp, List<Types> types,
 			String evolveFrom, String description, String level, String stage, String suffix, List<Attack> attacks,
 			List<Weakness> weakness, List<Ability> abilities, Integer retreat, String regulationMark) {
-		super();
-		this.id = id;
-		this.localId = localId;
-		this.name = name;
-		this.image = image;
+		super(id, localId, name, image);
 		this.illustrator = illustrator;
 		this.rarity = rarity;
 		this.category = category;
@@ -72,11 +64,8 @@ public class CardInfo {
 	}
 
 	CardInfo(JSONObject json) {
-		this.id = json.getString("id");
-		this.localId = json.getString("localId");
+		super(json);
 		this.illustrator = json.getString("illustrator");
-		this.name = json.getString("name");
-		this.image = json.getString("name");
 		this.rarity = Rarities.parse(json.getString("rarity"));
 		this.category = Categories.parse(json.getString("category"));
 		JSONObject variantSection = json.getJSONObject("variants");
@@ -141,38 +130,6 @@ public class CardInfo {
 	 */
 	public Integer getRetreat() {
 		return retreat;
-	}
-
-	/**
-	 * 
-	 * @return Card unique ID
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * 
-	 * @return Card set ID
-	 */
-	public String getLocalId() {
-		return localId;
-	}
-
-	/**
-	 * 
-	 * @return Card name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * 
-	 * @return Image URL, may be null
-	 */
-	public String getImage() {
-		return image;
 	}
 
 	/**
