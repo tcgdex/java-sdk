@@ -1,8 +1,14 @@
 package net.tcgdex;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -30,24 +36,27 @@ class Utils {
 		output = builder.toString();
 		return output;
 	}
-	
+
+	public static BufferedImage getImage(String imageUrl) throws IOException {
+		return ImageIO.read(new URL(imageUrl));
+	}
+
 	public static String prettifyEnumName(Enum<?> enumInstance) {
 		boolean space = true;
 		String rawRepresentation = enumInstance.name();
 		StringBuilder output = new StringBuilder(rawRepresentation.length());
-		for(int i = 0; i < rawRepresentation.length(); i++) {
-			String character = rawRepresentation.substring(i, i+1);
+		for (int i = 0; i < rawRepresentation.length(); i++) {
+			String character = rawRepresentation.substring(i, i + 1);
 			if (character.equals("_")) {
 				output.append(" ");
 				space = true;
 				continue;
 			}
 			if (space) {
-				//keep upper case
+				// keep upper case
 				space = false;
 				output.append(character);
-			}
-			else {
+			} else {
 				output.append(character.toLowerCase());
 			}
 		}

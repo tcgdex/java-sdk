@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.time.Month;
 import java.util.Arrays;
@@ -14,17 +15,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import net.tcgdex.Ability;
-import net.tcgdex.Attack;
-import net.tcgdex.CardInfo;
-import net.tcgdex.Categories;
-import net.tcgdex.Rarities;
-import net.tcgdex.SeriesInfo;
-import net.tcgdex.SetInfo;
-import net.tcgdex.SetResume;
-import net.tcgdex.TCGDexAPI;
-import net.tcgdex.Types;
-import net.tcgdex.Weakness;
+import net.tcgdex.TCGDexAPI.ImageResolution;
 import net.tcgdex.TCGDexAPI.Language;
 
 public class TestAPI {
@@ -163,8 +154,16 @@ public class TestAPI {
 	}
 
 	@Test
-	public void testImage() {
-		
+	public void testImage() throws IOException {
+		CardInfo info = api.getCardInfo("base4", "1");
+		BufferedImage high = api.getImage(info, ImageResolution.HIGH);
+		assertNotNull(high);
+		assertEquals(825, high.getHeight());
+		assertEquals(600, high.getWidth());
+		BufferedImage low = api.getImage(info, ImageResolution.LOW);
+		assertNotNull(low);
+		assertEquals(337, low.getHeight());
+		assertEquals(245, low.getWidth());
 	}
 
 }

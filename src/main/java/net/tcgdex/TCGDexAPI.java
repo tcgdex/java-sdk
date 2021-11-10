@@ -1,5 +1,6 @@
 package net.tcgdex;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,14 @@ public class TCGDexAPI {
 
 		public String getAPIID() {
 			return toString().toLowerCase();
+		}
+	}
+	
+	public enum ImageResolution {
+		HIGH, LOW;
+		
+		public String forUseInURL() {
+			return this.name().toLowerCase();
 		}
 	}
 
@@ -40,6 +49,18 @@ public class TCGDexAPI {
 			result += "/" + opt;
 		}
 		return result;
+	}
+	
+	/**
+	 * Loads the image of a card
+	 * @param card Card to get image for
+	 * @param resolution High is recommended if the card is supposed to be readable and more than a thumbnail
+	 * @return BufferedImage loaded, possibly null if no image of this card exists for this language
+	 * @throws IOException Thrown in response to any kind of networking error
+	 */
+	public BufferedImage getImage(CardResume card, ImageResolution resolution) throws IOException {
+		String url = card.getImage() + "/" + resolution.forUseInURL() + ".png";
+		return Utils.getImage(url);
 	}
 
 	/**
