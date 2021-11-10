@@ -31,7 +31,7 @@ public class Attack {
 	private final String damage;
 
 	Attack(JSONObject json) {
-		this(Types.parse(json.getJSONArray("cost")), json.getString("name"), json.optString("effect"),
+		this(Types.parse(json.optJSONArray("cost")), json.getString("name"), json.optString("effect"),
 				json.optString("damage"));
 	}
 

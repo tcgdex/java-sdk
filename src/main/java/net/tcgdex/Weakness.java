@@ -30,7 +30,7 @@ public class Weakness {
 	
 	
 	Weakness(JSONObject json) {
-		this(Types.parse(json.getString("type")), json.getString("value"));
+		this(Types.parse(json.getString("type")), json.optString("value"));
 	}
 	
 	Weakness(Types type, String value) {
@@ -56,7 +56,7 @@ public class Weakness {
 	}
 	
 	/**
-	 * @return Descriptor of the weakness multiplier, including a leading x, for example 'x2'
+	 * @return Descriptor of the weakness multiplier, including a leading x, for example 'x2'. May be null
 	 */
 	public String getValue() {
 		return value;

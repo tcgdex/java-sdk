@@ -36,7 +36,7 @@ public class CardInfo extends CardResume {
 
 	CardInfo(JSONObject json) {
 		super(json);
-		this.illustrator = json.getString("illustrator");
+		this.illustrator = json.optString("illustrator");
 		this.rarity = Rarities.parse(json.getString("rarity"));
 		this.category = Categories.parse(json.getString("category"));
 		JSONObject variantSection = json.getJSONObject("variants");
@@ -152,7 +152,7 @@ public class CardInfo extends CardResume {
 
 	/**
 	 * 
-	 * @return Card illustrator
+	 * @return Card illustrator, may be null
 	 */
 	public String getIllustrator() {
 		return illustrator;

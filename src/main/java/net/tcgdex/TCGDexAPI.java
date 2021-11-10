@@ -142,7 +142,11 @@ public class TCGDexAPI {
 	 */
 	public CardInfo getCardInfo(String globalCardID) throws IOException {
 		String data = Utils.doGet(buildURL("cards", globalCardID));
-		return new CardInfo(new JSONObject(data));
+		JSONObject json = new JSONObject(data);
+		if (json.has("error")) {
+			return null;
+		}
+		return new CardInfo(json);
 	}
 
 	/**
@@ -158,7 +162,11 @@ public class TCGDexAPI {
 	 */
 	public CardInfo getCardInfo(String setID, String cardID) throws IOException {
 		String data = Utils.doGet(buildURL("sets", setID, cardID));
-		return new CardInfo(new JSONObject(data));
+		JSONObject json = new JSONObject(data);
+		if (json.has("error")) {
+			return null;
+		}
+		return new CardInfo(json);
 	}
 	
 	/**

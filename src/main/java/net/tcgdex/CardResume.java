@@ -11,7 +11,7 @@ import org.json.JSONObject;
  * Core information to describe a single card
  *
  */
-public class CardResume {
+public class CardResume implements Comparable<CardResume> {
 	
 	static List<CardResume> parse(JSONArray array) {
 		if (array == null) {
@@ -38,6 +38,10 @@ public class CardResume {
 		this.localId = localId;
 		this.name = name;
 		this.image = image;
+	}
+	
+	public String toString() {
+		return String.format("%s (%s): %s,%s", name, id, localId, image);
 	}
 	
 	/**
@@ -68,5 +72,24 @@ public class CardResume {
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof CardResume)) {
+			return false;
+		}
+		CardResume other = (CardResume) o;
+		return this.id.equals(other.id);
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.id.hashCode();
+	}
+
+	@Override
+	public int compareTo(CardResume arg0) {
+		return this.id.compareTo(arg0.id);
 	}
 }
