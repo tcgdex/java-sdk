@@ -53,7 +53,7 @@ repositories {
 
 ```gradle
 dependencies {
-        implementation 'com.github.tcgdex:java-sdk:{Version}'
+        implementation 'net.tcgdex:java-sdk:{Version}'
 }
 ```
   
@@ -74,7 +74,7 @@ dependencies {
 
 ```xml
 <dependency>
-    <groupId>com.github.tcgdex</groupId>
+    <groupId>net.tcgdex</groupId>
     <artifactId>java-sdk</artifactId>
     <version>{Version}</version>
 </dependency>
