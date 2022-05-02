@@ -2,132 +2,93 @@ package net.tcgdex.sdk.models
 
 import net.tcgdex.sdk.Utils
 import net.tcgdex.sdk.internal.Model
-import net.tcgdex.sdk.models.subs.CardAbility
-import net.tcgdex.sdk.models.subs.CardAttack
-import net.tcgdex.sdk.models.subs.CardWeakRes
+import net.tcgdex.sdk.models.subs.*
 import java.awt.image.BufferedImage
-
 /**
- * Full description of a card, including all information available about it
+ * Pokémon TCG Card, It contains every informations about a specific card
  *
+ * @property id Globally unique card ID based on the set ID and the cards ID within the set
+ * @property localId ID indexing this card within its set, usually just its number
+ * @property name Card name
+ * @property image Card image url without the extension and quality
+ * @property illustrator Card illustrator
+ * @property rarity Card rarity
+ * @property category Card category
+ * @property variants The card possible variants
+ * @property set Resume of the set the card belongs to
+ * @property dexIDs the Pokémon Pokédex IDs (multiple if multiple pokémon appears on the card)
+ * @property hp HP of the pokemon
+ * @property types Types of the pokemon (multiple because some have multiple in the older sets)
+ * @property evolveFrom Name of the pokemon this one evolves from
+ * @property description the Pokémon Pokédex like description
+ * @property level the Pokémon Level (can be "X" if the card is of level X)
+ * @property stage the Pokémon Stage (changes depending on the API language)
+ * @property suffix the Pokémon Suffix (changes depending on the API language)
+ * @property item the Item the Pokémon have
+ * @property abilities the Card abilities (some cards have multiple abilities)
+ * @property attacks the Card Attacks
+ * @property weaknesses the Pokémon Weaknesses
+ * @property resistances the Pokémon Resistances
+ * @property retreat the Pokémon retreat Cost
+ * @property effect the Card Effect (Trainer/Energy only)
+ * @property trainerType the trainer sub type (changes depending on the API language)
+ * @property energyType the energy sub type (changes depending on the API language)
+ * @property regulationMark the Card Regulation mark
+ * @property legal the card ability to be played in tournaments
  */
 data class Card internal constructor(
-    /**
-     * @return Globally unique card ID based on the set ID and the cards ID within the set
-     */
     val id: String,
-    /**
-     * @return ID indexing this card within its set, usually just its number
-     */
-    val localId: String?,
-    /**
-     *
-     * @return Card name
-     */
-    val name: String?,
-    /**
-     *
-     * @return Card image, can be null
-     */
+    val localId: String,
+    val name: String,
     val image: String?,
-    /**
-     *
-     * @return Card illustrator, may be null
-     */
-    val illustrator: String,
 
-    /**
-     *
-     * @return Card rarity
-     */
+    val illustrator: String?,
     val rarity: String,
-
-    /**
-     *
-     * @return Card category
-     */
     val category: String,
-    private val hasNormalVariant: Boolean,
-    private val hasReverseVariant: Boolean,
-    private val hasHolo: Boolean,
-    private val hasFirstEditionPic: Boolean,
-
-    /**
-     * @return Resume of the set the card belongs to
-     */
+    val variants: CardVariants?,
     val set: SetResume,
-    private val dexIDs: MutableList<Int>,
 
-    /**
-     * @return HP of the pokemon, will be null if the card is not a pokemon
-     */
+    private val dexIDs: List<Int>?,
     val hp: Int?,
-
-    /**
-     * @return Types of the pokemon
-     */
-    val types: List<String?>?,
-
-    /**
-     *
-     * @return Name of the pokemon this one evolves from
-     */
-    val evolveFrom: String,
-
-    /**
-     *
-     * @return Card effect/description, may be null
-     */
-    val effect: String,
-
-    /**
-     *
-     * @return Pokemon level, may be 'X', hence not an integer
-     */
-    val level: String,
-
-    /**
-     * @return Pokemon's stage, like 'Basic'
-     */
-    val stage: String,
-
-    /**
-     * @return Suffix, like 'V', may be null
-     */
-    val suffix: String,
-
-    /**
-     * @return Attacks the pokemon has. Empty for cards without attacks
-     */
-    val attacks: List<CardAttack>,
-
-    /**
-     * @return Weaknesses the pokemon has. Empty for cards without attacks
-     */
-    val cardWeakRes: List<CardWeakRes>,
-
-    /**
-     * @return Pokemon's abilities. May be empty if it doesn't have any, but never
-     * null
-     */
+    val types: List<String>?,
+    val evolveFrom: String?,
+    val description: String?,
+    val level: String?,
+    val stage: String?,
+    val suffix: String?,
+    val item: CardItem?,
     val abilities: List<CardAbility>,
-
-    /**
-     * @return Card's retreat. Will be null for cards without retreat
-     */
+    val attacks: List<CardAttack>,
+    val weaknesses: List<CardWeakRes>,
+    val resistances: List<CardWeakRes>,
     val retreat: Int?,
 
-    /**
-     *
-     * @return Card's regulation mark. May be null if unknown or doesn't exist
-     */
-    val regulationMark: String?
+    val effect: String?,
+    val trainerType: String?,
+    val energyType: String?,
+    val regulationMark: String?,
+    val legal: Legal
 ) : Model() {
+
+    /**
+     * the Card Image full URL
+     *
+     * @param quality the quality you want your image to be in
+     * @param extension extension you want you image to be
+     * @return the full card URL with the extension and quality
+     */
     fun getImageUrl(quality: Quality, extension: Extension): String {
         return "${this.image}/${quality}.${extension}"
     }
 
-    fun getImage(quality: Quality, extension: Extension): BufferedImage {
-        return Utils.downloadImage(this.getImageUrl(quality, extension))
+    /**
+     * Get image buffer
+     *
+     * @param quality the quality you want your image to be in
+     * @param format extension you want you image to be
+     * @return the full card Buffer in the format you want
+     */
+    fun getImage(quality: Quality, format: Extension): BufferedImage {
+        return Utils.downloadImage(this.getImageUrl(quality, format))
     }
 }

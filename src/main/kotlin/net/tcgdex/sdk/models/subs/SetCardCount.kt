@@ -1,28 +1,20 @@
 package net.tcgdex.sdk.models.subs
 
+/**
+ * Set card count
+ *
+ * @property total total of number of cards
+ * @property official number of cards officialy (on the bottom of each cards)
+ * @property normal number of cards having a normal version
+ * @property reverse number of cards having an reverse version
+ * @property holo number of cards having an holo version
+ * @property firstEd Number of possible cards
+ */
 data class SetCardCount (
-    /**
-     * total of number of cards
-     */
     val total: Int,
-    /**
-     * number of cards officialy (on the bottom of each cards)
-     */
     val official: Int,
-    /**
-     * number of cards having a normal version
-     */
     val normal: Int,
-    /**
-     * number of cards having an reverse version
-     */
     val reverse: Int,
-    /**
-     * number of cards having an holo version
-     */
     val holo: Int,
-    /**
-     * Number of possible cards
-     */
     val firstEd: Int?
 )

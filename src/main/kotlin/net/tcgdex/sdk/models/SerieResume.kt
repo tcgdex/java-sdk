@@ -1,17 +1,53 @@
 package net.tcgdex.sdk.models
 
+import net.tcgdex.sdk.Utils
+import net.tcgdex.sdk.internal.Model
+import java.awt.image.BufferedImage
+
 
 /**
- * Contains all information describing a series, an overarching group of sets, for example XY
+ * Serie Resume
  *
+ * @property id the Serie unique ID
+ * @property name the Serie name
+ * @property logo the Serie Logo (basically also the first set logo)
  */
 open class SerieResume internal constructor(
+    val id: String,
+    val name: String,
+    val logo: String?
+) : Model() {
+
     /**
-     * @return Serie unique ID
+     * Get the logo full url
+     *
+     * @param extension
+     * @return
      */
-    val id: String?,
+    fun getLogoUrl(extension: Extension): String? {
+        if (this.logo == null) {
+            return null
+        }
+        return "${this.logo}.${extension}"
+    }
+
     /**
-     * @return Serie name
+     * Get the logo buffer
+     *
+     * @param format
+     * @return
      */
-    val name: String?
-)
+    fun getLogo(format: Extension): BufferedImage? {
+        val logo = this.getLogoUrl(format) ?: return null
+        return Utils.downloadImage(logo)
+    }
+
+    /**
+     * Get the full Serie
+     *
+     * @return the full serie if available
+     */
+    fun getFullSerie(): Serie? {
+        return this.tcgdex.fetchSerie(this.id)
+    }
+}

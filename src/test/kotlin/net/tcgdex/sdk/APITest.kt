@@ -15,6 +15,7 @@ class APITest {
     @Test
     @Throws(IOException::class)
     fun testFullCardInfo() {
+        assertNotNull(api.fetchCards())
         assertNotNull(api.fetchCard("swsh3-136"))
         assertNotNull(api.fetchCard("swsh3", "136"))
         assertNotNull(api.fetchSet("swsh3"))
