@@ -29,7 +29,7 @@ class Serie (
         if (this.logo == null) {
             return null
         }
-        return "${this.logo}.${extension}"
+        return "${this.logo}.${extension.value}"
     }
 
     /**

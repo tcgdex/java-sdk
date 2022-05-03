@@ -44,7 +44,7 @@ data class Set internal constructor(
         if (this.logo == null) {
             return null
         }
-        return "${this.logo}.${extension}"
+        return "${this.logo}.${extension.value}"
     }
 
     /**
@@ -68,7 +68,7 @@ data class Set internal constructor(
         if (this.symbol == null) {
             return null
         }
-        return "${this.symbol}.${extension}"
+        return "${this.symbol}.${extension.value}"
     }
 
     /**

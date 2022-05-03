@@ -30,7 +30,7 @@ data class CardResume internal constructor(
      * @return the full card URL with the extension and quality
      */
     fun getImageUrl(quality: Quality, extension: Extension): String {
-        return "${this.image}/${quality}.${extension}"
+        return "${this.image}/${quality}.${extension.value}"
     }
 
     /**

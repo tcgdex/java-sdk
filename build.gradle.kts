@@ -7,6 +7,10 @@ plugins {
     `maven-publish`
 }
 
+val artifact = "sdk"
+group = "net.tcgdex"
+version = "2.0.1"
+
 repositories {
     mavenCentral()
 }
@@ -47,9 +51,9 @@ java {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "net.tcgdex"
-            artifactId = "sdk"
-            version = "2.0.0"
+            // groupId = group
+            artifactId = artifact
+            // version = ver
 
             from(components["java"])
 
