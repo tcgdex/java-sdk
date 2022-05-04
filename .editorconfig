@@ -1,0 +1,34 @@
+root = true
+
+# Base Configuration
+[*]
+indent_style = tab
+indent_size = 4
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+max_line_length = 80
+end_of_line = lf
+
+# Yaml Standard
+[*.{yaml,yml}]
+indent_style = space
+indent_size = 2
+
+# Markdown Standards
+[*.md]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = false
+
+# C++ Standards
+[*.{cpp,h,ino}]
+indent_style = space
+
+# PHP Standards
+[*.php]
+indent_style = space
+
+# Java/Kotlin Standards
+[*.{java,kt,kts}]
+indent_style = space
