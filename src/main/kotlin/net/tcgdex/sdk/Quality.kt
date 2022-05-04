@@ -1,12 +1,16 @@
-package net.tcgdex.sdk.models
+package net.tcgdex.sdk
 
 /**
  * Image quality if applicable
  * (only cards does have quality selector)
- *
- * @property value the string representation of the quality
  */
-enum class Quality(val value: String) {
+enum class Quality(
+
+    /**
+     * the string representation of the quality
+     */
+    val value: String
+) {
 
     /**
      * A High quality image

@@ -1,11 +1,15 @@
-package net.tcgdex.sdk.models
+package net.tcgdex.sdk
 
 /**
  * The different extension an image is available in
- *
- * @property value the string representation of the set
  */
-enum class Extension(val value: String) {
+enum class Extension(
+
+    /**
+     * the string representation of the extension
+     */
+    val value: String
+) {
 
     /**
      * .png image, with transparent background
