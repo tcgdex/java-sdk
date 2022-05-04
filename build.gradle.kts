@@ -1,6 +1,7 @@
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     kotlin("jvm") version "1.6.20"
+    id("org.jetbrains.dokka") version "1.6.21"
 
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
@@ -40,12 +41,16 @@ tasks {
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
-
 }
 
 java {
     withJavadocJar()
     withSourcesJar()
+}
+
+// Javadocs
+val javadocJar = tasks.named<Jar>("javadocJar") {
+    from(tasks.named("dokkaJavadoc"))
 }
 
 publishing {
