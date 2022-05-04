@@ -4,7 +4,7 @@
 	</a>
 </p>
 <p align="center">
-	<a href="https://jitpack.io/#tcgdex/java-sdk">
+	<a href="https://jitpack.io/#net.tcgdex/java-sdk">
 		<img src="https://img.shields.io/jitpack/v/github/tcgdex/java-sdk?style=flat-square" alt="Package Version">
 	</a>
 	<!--<a href="http://npmjs.com/@tcgdex/sdk">
