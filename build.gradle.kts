@@ -8,9 +8,9 @@ plugins {
     `maven-publish`
 }
 
-val artifact = "sdk"
-group = "net.tcgdex"
-version = "2.0.1"
+val artifact = System.getenv("artifact") ?: "sdk"
+group = System.getenv("group") ?: "net.tcgdex"
+version = System.getenv("version") ?: "2.0.0"
 
 repositories {
     mavenCentral()
