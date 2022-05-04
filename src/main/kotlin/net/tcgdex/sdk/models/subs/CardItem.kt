@@ -2,11 +2,16 @@ package net.tcgdex.sdk.models.subs
 
 /**
  * Card Item
- *
- * @property name the Item name
- * @property effect the item effect
  */
 data class CardItem(
-    val name: String,
-    val effect: String
+
+	/**
+	 * the Item name
+	 */
+	val name: String,
+
+	/**
+	 * the item effect
+	 */
+	val effect: String
 )

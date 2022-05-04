@@ -1,5 +1,6 @@
 package net.tcgdex.sdk.models
 
+import net.tcgdex.sdk.Extension
 import net.tcgdex.sdk.Utils
 import net.tcgdex.sdk.internal.Model
 import net.tcgdex.sdk.models.subs.Legal
@@ -8,29 +9,57 @@ import java.awt.image.BufferedImage
 
 /**
  * Pokémon TCG Set class
- *
- * @property id Globally unique set ID
- * @property name the Set mame
- * @property logo the Set Logo incomplete URL (use getLogoUrl/getLogo)
- * @property symbol the Set Symbol imcomplete URL (use getSymbolUrl/getSymbol)
- * @property serie the serie this set is a part of
- * @property tcgOnline the TCG Online Code
- * @property releaseDate the Set release date as yyyy-mm-dd
- * @property legal the set legality (won't indicate if a card is banned)
- * @property cardCount the number of card in the set
- * @property cards the cards contained in this set
  */
 data class Set internal constructor(
+
+    /**
+     * Globally unique set ID
+     */
     val id: String?,
+
+    /**
+     * the Set mame
+     */
     val name: String?,
+
+    /**
+     * the Set Logo incomplete URL (use getLogoUrl/getLogo)
+     */
     val logo: String?,
+
+    /**
+     * the Set Symbol imcomplete URL (use getSymbolUrl/getSymbol)
+     */
     val symbol: String?,
 
+    /**
+     * the serie this set is a part of
+     */
     val serie: SerieResume,
+
+    /**
+     * the TCG Online Code
+     */
     val tcgOnline: String?,
+
+    /**
+     * the Set release date as yyyy-mm-dd
+     */
     val releaseDate: String?,
+
+    /**
+     * the set legality (won't indicate if a card is banned)
+     */
     val legal: Legal,
+
+    /**
+     * the number of card in the set
+     */
     val cardCount: SetCardCount,
+
+    /**
+     * the cards contained in this set
+     */
     val cards: List<CardResume>
 ) : Model() {
 

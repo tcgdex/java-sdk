@@ -9,12 +9,14 @@ import net.tcgdex.sdk.models.SetResume
 import net.tcgdex.sdk.models.StringEndpoint
 
 /**
- * TCGdex
+ * The main TCGdex SDK instance
  *
- * @property language the language you want to use, values: [en,fr,es,de,pt,it]
- * @constructor Create empty TCGdex in the specific language
+ * @constructor Create the TCGdex Instance in the specific language
  */
 class TCGdex(
+    /**
+     * the language you want to use, values: [en,fr,es,de,pt,it]
+     */
     var language: String
 ) {
 
@@ -45,7 +47,7 @@ class TCGdex(
     }
 
     /**
-     * Fetch a specific card by it's set and local IDs
+     * Fetch a specific card by its set and local IDs
      *
      * @param setId the set ID/name
      * @param cardId the card local ID

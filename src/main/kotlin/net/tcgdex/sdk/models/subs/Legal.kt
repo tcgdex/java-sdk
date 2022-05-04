@@ -3,12 +3,17 @@ package net.tcgdex.sdk.models.subs
 /**
  * Card Legality
  *
- * _note: cards are always legal in the ulimited tournament_
- *
- * @property standard card is legal in standard tournaments
- * @property expanded card is legal in expanded tournaments
+ * _note: cards are always usable in the unlimited tournaments_
  */
 data class Legal(
-    val standard: Boolean,
-    val expanded: Boolean
+
+	/**
+	 * card is usable in standard tournaments
+	 */
+	val standard: Boolean,
+
+	/**
+	 * card is usable in expanded tournaments
+	 */
+	val expanded: Boolean
 )

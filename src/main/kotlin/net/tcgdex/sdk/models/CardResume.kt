@@ -1,5 +1,7 @@
 package net.tcgdex.sdk.models
 
+import net.tcgdex.sdk.Extension
+import net.tcgdex.sdk.Quality
 import net.tcgdex.sdk.Utils
 import net.tcgdex.sdk.internal.Model
 import java.awt.image.BufferedImage
@@ -8,17 +10,27 @@ import java.awt.image.BufferedImage
  * Card Resume class, contains basic informations about a specific card
  *
  * to get the full card you can use the `getFullCard()` function
- *
- * @property id Globally unique card ID based on the set ID and the cards ID within the set
- * @property localId ID indexing this card within its set, usually just its number
- * @property name Card name
- * @property image Card image url without the extension and quality
  */
 data class CardResume internal constructor(
 
+    /**
+     * Globally unique card ID based on the set ID and the cards ID within the set
+     */
     val id: String,
+
+    /**
+     * ID indexing this card within its set, usually just its number
+     */
     val localId: String,
+
+    /**
+     * Card name
+     */
     val name: String,
+
+    /**
+     * Card image url without the extension and quality
+     */
     val image: String?
 ) : Model() {
 

@@ -1,5 +1,6 @@
 package net.tcgdex.sdk.models
 
+import net.tcgdex.sdk.Extension
 import net.tcgdex.sdk.Utils
 import net.tcgdex.sdk.internal.Model
 import net.tcgdex.sdk.models.subs.SetCardCountResume
@@ -7,23 +8,32 @@ import java.awt.image.BufferedImage
 
 /**
  * Set resume
- *
- * @property id Globally unique set ID
- * @property name the Set mame
- * @property logo the Set Logo incomplete URL (use getLogoUrl/getLogo)
- * @property symbol the Set Symbol imcomplete URL (use getSymbolUrl/getSymbol)
- * @property cardCount the number of card in the set
  */
 data class SetResume internal constructor(
 
+    /**
+     * Globally unique set ID
+     */
     val id: String,
 
+    /**
+     * the Set mame
+     */
     val name: String,
 
+    /**
+     * the Set Logo incomplete URL (use getLogoUrl/getLogo)
+     */
     val logo: String?,
 
+    /**
+     * the Set Symbol incomplete URL (use getSymbolUrl/getSymbol)
+     */
     val symbol: String?,
 
+    /**
+     * the number of card in the set
+     */
     val cardCount: SetCardCountResume
 ) : Model() {
 

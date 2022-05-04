@@ -1,21 +1,33 @@
 package net.tcgdex.sdk.models
 
+import net.tcgdex.sdk.Extension
 import net.tcgdex.sdk.Utils
 import net.tcgdex.sdk.internal.Model
 import java.awt.image.BufferedImage
 
 /**
  * Pokémon TCG Serie
- *
- * @property sets the list of sets the Serie contains
- * @property id the Serie unique ID
- * @property name the Serie name
- * @property logo the Serie Logo (basically also the first set logo)
  */
 class Serie (
+
+    /**
+     * the list of sets the Serie contains
+     */
     val sets: List<SetResume>,
+
+    /**
+     * the Serie unique ID
+     */
     val id: String,
+
+    /**
+     * the Serie name
+     */
     val name: String,
+
+    /**
+     * the Serie Logo (basically also the first set logo)
+     */
     val logo: String?
 ) : Model() {
 
