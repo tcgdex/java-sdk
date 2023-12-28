@@ -31,9 +31,12 @@ val branch = "git rev-parse --abbrev-ref HEAD".runCommand(workingDir = rootDir)
 val tag = "git tag -l --points-at HEAD".runCommand(workingDir = rootDir)
 val commitId = "git rev-parse HEAD".runCommand(workingDir = rootDir)
 
-val artifact = System.getenv("artifact") ?: "sdk"
-group = System.getenv("group") ?: "net.tcgdex"
-version = System.getenv("version") ?: tag.drop(1) ?: "2.0.0"
+val finalVersion = System.getenv("version") as String? ?: tag.drop(1) ?: "2.0.0"
+val finalGroup = System.getenv("group") as String? ?: "net.tcgdex"
+val artifact = System.getenv("artifact") as String? ?: "sdk"
+
+group = finalGroup
+version = finalVersion
 
 repositories {
     mavenCentral()
@@ -79,9 +82,9 @@ val javadocJar = tasks.named<Jar>("javadocJar") {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = group
+            groupId = finalGroup
             artifactId = artifact
-            version = ver
+            version = finalVersion
 
             from(components["java"])
 
