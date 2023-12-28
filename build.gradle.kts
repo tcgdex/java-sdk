@@ -85,5 +85,45 @@ publishing {
                 }
             }
         }
+        register<MavenPublication>("gpr") {
+            // groupId = group
+            artifactId = artifact
+            // version = ver
+
+            from(components["java"])
+
+            pom {
+                name.set("TCGdex SDK")
+                description.set("Communicate with the Open Source TCGdex API in Kotlin/Java using the SDK")
+                url.set("https://github.com/tcgdex/java-sdk")
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://github.com/tcgdex/java-sdk/blob/master/LICENSE.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("avior")
+                        name.set("Avior")
+                        email.set("contact@tcgdex.net")
+                    }
+                }
+                scm {
+                    connection.set("scm:git@github.com:tcgdex/java-sdk.git")
+                    url.set("https://github.com/tcgdex/java-sdk")
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "GithubPackages"
+            url = uri("https://maven.pkg.github.com/tcgdex/java-sdk")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+            }
+        }
     }
 }

@@ -5,34 +5,36 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Java CI with Gradle
+name: Build & test the project
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+  # Run on any pull request
   pull_request:
-    branches: [ master ]
-
-permissions:
-  contents: read
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         # follows https://en.wikipedia.org/wiki/Java_version_history#Release_table
         java-versions: ['8', '11', '17', '21']
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
+
     - name: Set up Java ${{ matrix.java-versions }}
       uses: actions/setup-java@v3
       with:
         java-version: ${{ matrix.java-versions }}
         distribution: 'temurin'
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@fec4a42eb0c83154e5c9590748ba8337949c5701
+
+    - name: Build & Test
+      uses: gradle/gradle-build-action@v2
       with:
-        arguments: build
+        arguments: build test
