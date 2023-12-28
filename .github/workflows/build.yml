@@ -20,13 +20,17 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # follows https://en.wikipedia.org/wiki/Java_version_history#Release_table
+        java-versions: ['8', '11', '17', '21']
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 11
+    - name: Set up Java ${{ matrix.java-versions }}
       uses: actions/setup-java@v3
       with:
-        java-version: '11'
+        java-version: ${{ matrix.java-versions }}
         distribution: 'temurin'
     - name: Build with Gradle
       uses: gradle/gradle-build-action@fec4a42eb0c83154e5c9590748ba8337949c5701
