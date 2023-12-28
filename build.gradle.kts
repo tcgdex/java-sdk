@@ -8,9 +8,32 @@ plugins {
     `maven-publish`
 }
 
+// from: https://discuss.kotlinlang.org/t/use-git-hash-as-version-number-in-build-gradle-kts/19818/8
+fun String.runCommand(
+    workingDir: File = File("."),
+    timeoutAmount: Long = 60,
+    timeoutUnit: TimeUnit = TimeUnit.SECONDS
+): String = ProcessBuilder(split("\\s(?=(?:[^'\"`]*(['\"`])[^'\"`]*\\1)*[^'\"`]*$)".toRegex()))
+    .directory(workingDir)
+    .redirectOutput(ProcessBuilder.Redirect.PIPE)
+    .redirectError(ProcessBuilder.Redirect.PIPE)
+    .start()
+    .apply { waitFor(timeoutAmount, timeoutUnit) }
+    .run {
+        val error = errorStream.bufferedReader().readText().trim()
+        if (error.isNotEmpty()) {
+            return@run ""
+        }
+        inputStream.bufferedReader().readText().trim()
+    }
+
+val branch = "git rev-parse --abbrev-ref HEAD".runCommand(workingDir = rootDir)
+val tag = "git tag -l --points-at HEAD".runCommand(workingDir = rootDir)
+val commitId = "git rev-parse HEAD".runCommand(workingDir = rootDir)
+
 val artifact = System.getenv("artifact") ?: "sdk"
 group = System.getenv("group") ?: "net.tcgdex"
-version = System.getenv("version") ?: "2.0.0"
+version = System.getenv("version") ?: tag.drop(1) ?: "2.0.0"
 
 repositories {
     mavenCentral()
@@ -56,9 +79,9 @@ val javadocJar = tasks.named<Jar>("javadocJar") {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            // groupId = group
+            groupId = group
             artifactId = artifact
-            // version = ver
+            version = ver
 
             from(components["java"])
 
