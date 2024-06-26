@@ -10,9 +10,12 @@ name: Build & test the project
 on:
   push:
     branches:
-      - master
-  # Run on any pull request
+      - '*'
+    tags:
+      - v*
   pull_request:
+    branches:
+      - master
 
 jobs:
   build:
