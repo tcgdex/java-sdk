@@ -1,6 +1,8 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "2.0.0"
     id("org.jetbrains.dokka") version "1.9.20"
 
     // Apply the java-library plugin for API and implementation separation.
@@ -31,9 +33,9 @@ val branch = "git rev-parse --abbrev-ref HEAD".runCommand(workingDir = rootDir)
 val tag = "git tag -l --points-at HEAD".runCommand(workingDir = rootDir)
 val commitId = "git rev-parse HEAD".runCommand(workingDir = rootDir)
 
-val finalVersion = System.getenv("version") as String? ?: tag.drop(1) ?: "2.0.0"
-val finalGroup = System.getenv("group") as String? ?: "net.tcgdex"
-val artifact = System.getenv("artifact") as String? ?: "sdk"
+val finalVersion = System.getenv("version") ?: tag.drop(1) ?: "2.0.0"
+val finalGroup = System.getenv("group") ?: "net.tcgdex"
+val artifact = System.getenv("artifact") ?: "sdk"
 
 group = finalGroup
 version = finalVersion
@@ -59,19 +61,17 @@ tasks.test {
     }
 }
 
-
-tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
-    }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_1_8)
     }
 }
 
 java {
     withJavadocJar()
     withSourcesJar()
+
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 // Javadocs
