@@ -66,7 +66,7 @@ data class Card internal constructor(
 	/**
 	 * the Pokémon Pokédex IDs (multiple if multiple pokémon appears on the card)
 	 */
-	val dexIDs: List<Int>?,
+	val dexId: List<Int>?,
 
 	/**
 	 * HP of the pokemon
