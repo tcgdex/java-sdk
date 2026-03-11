@@ -48,4 +48,4 @@ jobs:
         gradle-version: ${{ matrix.versions.gradle }}
 
     - name: Build & Test
-      run: ./gradlew build test
+      run: gradle build test
