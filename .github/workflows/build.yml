@@ -23,20 +23,27 @@ jobs:
     strategy:
       matrix:
         # follows https://en.wikipedia.org/wiki/Java_version_history#Release_table
-        java-versions: ['8', '11', '17', '21']
+        versions: [
+          { java: '11', gradle: '8.14.3' },
+          { java: '17', gradle: 'current' },
+          { java: '21', gradle: 'current' },
+          { java: '25', gradle: 'current' },
+        ]
 
     steps:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Set up Java ${{ matrix.java-versions }}
+    - name: Set up Java ${{ matrix.versions.java }}
       uses: actions/setup-java@v4
       with:
-        java-version: ${{ matrix.java-versions }}
+        java-version: ${{ matrix.versions.java }}
         distribution: 'temurin'
-        cache: 'gradle'
+
+    - name: Setup Gradle ${{ matrix.versions.gradle }}
+      uses: gradle/actions/setup-gradle@v5
+      with:
+        gradle-version: ${{ matrix.versions.gradle }}
 
     - name: Build & Test
-      uses: gradle/gradle-build-action@v3
-      with:
-        arguments: build test
+      run: gradle build test --stacktrace
