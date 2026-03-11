@@ -48,6 +48,4 @@ jobs:
         gradle-version: ${{ matrix.versions.gradle }}
 
     - name: Build & Test
-      uses: gradle/gradle-build-action@v3
-      with:
-        arguments: build test
+      run: ./gradlew build test
