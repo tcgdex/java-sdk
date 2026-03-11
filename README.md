@@ -4,8 +4,8 @@
 	</a>
 </p>
 <p align="center">
-	<a href="https://jitpack.io/#net.tcgdex/java-sdk">
-		<img src="https://img.shields.io/jitpack/v/github/tcgdex/java-sdk?style=flat-square" alt="Package Version">
+	<a href="https://central.sonatype.com/artifact/net.tcgdex/java-sdk/overview">
+		<img src="https://img.shields.io/maven-central/v/net.tcgdex/java-sdk?style=flat-square&logo=apachemaven" alt="Package Version">
 	</a>
 	<!--<a href="http://npmjs.com/@tcgdex/sdk">
 		<img src="https://img.shields.io/npm/dm/@tcgdex/sdk?style=flat-square" alt="NPM Downloads">
@@ -16,10 +16,10 @@
 		<a href="https://github.com/tcgdex/java-sdk/stargazers">
 		<img src="https://img.shields.io/github/stars/tcgdex/java-sdk?style=flat-square" alt="Github stars">
 	</a>
-	<a href="https://github.com/tcgdex/javascript-sdk/actions/workflows/build.yml">
-		<img src="https://img.shields.io/github/workflow/status/tcgdex/javascript-sdk/Build%20&%20Test?style=flat-square" alt="the TCGdex JAvascript SDK is released under the MIT license." />
+	<a href="https://github.com/tcgdex/java/actions/workflows/build.yml">
+		<img src="https://img.shields.io/github/actions/workflow/status/tcgdex/java-sdk/build.yml?style=flat-square" alt="the TCGdex Java SDK is released under the MIT license." />
 	</a>
-	<a href="https://discord.gg/NehYTAhsZE">
+	<a href="https://tcgdex.dev/discord">
 		<img src="https://img.shields.io/discord/857231041261076491?color=%235865F2&label=Discord&style=flat-square" alt="Discord Link">
 	</a>
 </p>
@@ -40,42 +40,22 @@ _The full API/SDK documentation in progress at [API Documentation - TCGdex](http
 
 **Gradle**
 
-1. add the repository in you `build.gradle`
-
-```gradle
-repositories {
-  ...
-  maven { url 'https://jitpack.io' }
-}
-```
-
-2. Add the dependency in your `build.gradle`
+Add the dependency in your `build.gradle`
 
 ```gradle
 dependencies {
-        implementation 'net.tcgdex:java-sdk:{Version}'
+        implementation 'net.tcgdex:sdk:{Version}'
 }
 ```
   
 **Maven**
 
-1. add the repository in your `pom.xml`
-
-```xml
-<repositories>
-  <repository>
-      <id>jitpack.io</id>
-      <url>https://jitpack.io</url>
-  </repository>
-</repositories>
-```
-
-2. Add the depedency in your `pom.xml`
+Add the dependency in your `pom.xml`
 
 ```xml
 <dependency>
     <groupId>net.tcgdex</groupId>
-    <artifactId>java-sdk</artifactId>
+    <artifactId>sdk</artifactId>
     <version>{Version}</version>
 </dependency>
 ```
@@ -138,7 +118,7 @@ api.fetchVariant("holo")
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/tcgdex/javascript-sdk/blob/master/CONTRIBUTING.md)
+See [CONTRIBUTING.md](https://github.com/tcgdex/java-sdk/blob/master/CONTRIBUTING.md)
 
 TL::DR
 
@@ -150,6 +130,6 @@ TL::DR
 
 ## License
 
-This project is licensed under the MIT License. A copy of the license is available at [LICENSE.md](https://github.com/tcgdex/javascript-sdk/blob/master/LICENSE.md)
+This project is licensed under the MIT License. A copy of the license is available at [LICENSE.md](https://github.com/tcgdex/java-sdk/blob/master/LICENSE.md)
 
 This is based on the [Maxopoly](https://github.com/Maxopoly) TCGdex Java SDK
