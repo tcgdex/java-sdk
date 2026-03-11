@@ -27,8 +27,8 @@ jobs:
         # follows https://en.wikipedia.org/wiki/Java_version_history#Release_table
         versions: [
           { java: '11', gradle: '8.14.3' },
-          { java: '17', gradle: '8.14.3' },
-          { java: '21', gradle: '8.14.3' },
+          { java: '17', gradle: 'current' },
+          { java: '21', gradle: 'current' },
           { java: '25', gradle: 'current' },
         ]
 
@@ -48,4 +48,4 @@ jobs:
         gradle-version: ${{ matrix.versions.gradle }}
 
     - name: Build & Test
-      run: gradle build test
+      run: gradle build test --stacktrace
