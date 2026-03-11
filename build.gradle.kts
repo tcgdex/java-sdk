@@ -78,9 +78,9 @@ java {
 }
 
 // Javadocs
-val javadocJar = tasks.named<Jar>("javadocJar") {
-    from(tasks.named("dokkaJavadoc"))
-}
+// val javadocJar = tasks.named<Jar>("javadocJar") {
+//     from(tasks.named("dokkaJavadoc"))
+// }
 
 
 mavenPublishing {
