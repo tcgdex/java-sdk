@@ -1,5 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import com.vanniktech.maven.publish.SonatypeHost
+import com.vanniktech.maven.publish.KotlinJvm
+import com.vanniktech.maven.publish.JavadocJar
 
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
@@ -71,19 +73,17 @@ kotlin {
 }
 
 java {
-    withJavadocJar()
-    withSourcesJar()
-
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-// Javadocs
-// val javadocJar = tasks.named<Jar>("javadocJar") {
-//     from(tasks.named("dokkaJavadoc"))
-// }
 
 
 mavenPublishing {
+    configure(KotlinJvm(
+        javadocJar = JavadocJar.Dokka("dokkaJavadoc"),
+        sourcesJar = true,
+    ))
+
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
     signAllPublications()
