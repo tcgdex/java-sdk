@@ -62,6 +62,10 @@ data class Card internal constructor(
 	 */
 	val set: SetResume,
 
+    /**
+     * 	Market pricing information
+     */
+    val pricing: Pricing?,
 
 	/**
 	 * the Pokémon Pokédex IDs (multiple if multiple pokémon appears on the card)
