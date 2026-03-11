@@ -26,9 +26,9 @@ jobs:
       matrix:
         # follows https://en.wikipedia.org/wiki/Java_version_history#Release_table
         versions: [
-          { java: '11', gradle: 'wrapper' },
-          { java: '17', gradle: 'wrapper' },
-          { java: '21', gradle: 'wrapper' },
+          { java: '11', gradle: '8.14.3' },
+          { java: '17', gradle: '8.14.3' },
+          { java: '21', gradle: '8.14.3' },
           { java: '25', gradle: 'current' },
         ]
 
