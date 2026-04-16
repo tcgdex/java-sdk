@@ -4,8 +4,8 @@
 	</a>
 </p>
 <p align="center">
-	<a href="https://central.sonatype.com/artifact/net.tcgdex/java-sdk/overview">
-		<img src="https://img.shields.io/maven-central/v/net.tcgdex/java-sdk?style=flat-square&logo=apachemaven" alt="Package Version">
+	<a href="https://central.sonatype.com/artifact/net.tcgdex/sdk/overview">
+		<img src="https://img.shields.io/maven-central/v/net.tcgdex/sdk?style=flat-square&logo=apachemaven" alt="Package Version">
 	</a>
 	<!--<a href="http://npmjs.com/@tcgdex/sdk">
 		<img src="https://img.shields.io/npm/dm/@tcgdex/sdk?style=flat-square" alt="NPM Downloads">
