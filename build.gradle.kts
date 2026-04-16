@@ -12,7 +12,7 @@ plugins {
     `java-library`
 
     // maven publishing
-    id("com.vanniktech.maven.publish") version "0.29.0"
+    id("com.vanniktech.maven.publish") version "0.36.0"
 }
 
 // from: https://discuss.kotlinlang.org/t/use-git-hash-as-version-number-in-build-gradle-kts/19818/8
