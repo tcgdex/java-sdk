@@ -5,7 +5,7 @@ import com.vanniktech.maven.publish.JavadocJar
 
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    kotlin("jvm") version "2.3.20"
+    kotlin("jvm") version "2.3.21"
     id("org.jetbrains.dokka") version "2.2.0"
 
     // Apply the java-library plugin for API and implementation separation.
